@@ -1,0 +1,103 @@
+<script>
+    function checkEmpty() {
+        var cknome = document.getElementById("inputnome").value;
+        var ckcorso = document.getElementById("inputcorso").value;
+        if (cknome == "") {
+            alert("Prego, inserire il nome del corso");
+            return false;
+        } else if (ckcorso == "") {
+            alert("Prego, inserire lo stile del corso");
+            return false;
+        }
+    }
+</script>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pagina di inserimento corsi</title>
+</head>
+<body>
+
+<style>
+    .obbligatorio {
+        border: solid red;
+        border-radius: 4px;
+    }
+
+    /*CSS per il bottone submit*/
+    .submit {
+        background-color: darkblue;
+        border: blue;
+        color: white;
+        padding: 10px 10px;
+        margin: 4px 2px;
+    }
+
+    /*CSS per il bottone reset*/
+    .reset {
+        background-color: red;
+        border: #555555;
+        color: black;
+        padding: 10px 10px;
+
+    }
+
+    h4 {
+        color: red;
+    }
+</style>
+
+
+<center>
+    <h3>Pagina di inserimento dei corsi</h3>
+
+    <h4> Attenzione! I bordi contrassegnati in rosso sono per contrassegnare i campi che devono essere univoci
+        all'interno del DataBase.</h4>
+    <form action="InserimentoCorsi.php" method="post">
+        <table>
+            <tr>
+                <td>Nome:</td>
+                <td>
+                    <input type="text" name="nome" id="inputnome" class="obbligatorio">
+                </td>
+            </tr>
+
+            <tr>
+                <td>Stile:</td>
+                <td>
+                    <input type="text" name="stile" id="inputcorso" class="obbligatorio">
+                </td>
+            </tr>
+
+            <a href="inserimentocorsi.php">
+                <tr>
+                    <td>
+                        <button type="submit" name="buttonAggiunta" onclick="return checkEmpty()" class="submit">
+                            Aggiungi corso
+                        </button>
+                    </td>
+                </tr>
+            </a>
+            <tr>
+                <td>
+                    <button type="reset" name="buttonReset" class="reset">Reset dei campi</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</center>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
