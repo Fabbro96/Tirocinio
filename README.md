@@ -1,3 +1,6 @@
+## DA INSERIRE SU HTDOCS ##
+
+
 # COSE DA FARE
 -Gestione della pagina "Home.php" in quanto incompleta
 
