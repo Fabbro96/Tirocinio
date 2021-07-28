@@ -2,21 +2,17 @@
 
 
 # COSE DA FARE
--Gestione della pagina "Home.php" in quanto incompleta
+-Gestione della pagina dell'admin/insegnante (aggiungere eventi, photo shooting, corsi)
 
--Gestione delle sessioni: un utente normale puó solo prenotare corsi, ecc.. mentre un admin ha opzioni diverse.
+-Admin iscrive utente ai corsi
 
--Selezione di un corso da parte di un utente (iscrittoscegliecorso.php), deve essere migliorato
+-Inserimento dei dettagli riguardanti il corso (Etá consigliata, costo mensile, data di fine, volte a settimana)
 
--Pagina di registrazione per gli insegnanti gestita dagli admin
+-Bisogna sistemare la gestione degli alert nei vari php (registrazioneUtente, inserimentoCorso) perché quando aggiorno la pagina dopo aver inserito i dati esce subito l'alert.
 
--Pagina riservata all'insegnante
+-Come gestisco l'inserimento dei corsi?
 
--Pagina riservata al corso
-
--Pagina per l'evento privato
-
--Pagina per lo shooting
+-Visualizzare gli eventi ai quali sono iscritto
 
 
 # COSE FATTE
@@ -28,6 +24,19 @@
 
 -Pagina contenente la lista degli utenti registrati (list.php)
 
--Pagina per l'inserimento dei corsi (inserimentocorsi.php, inserimentocorso.html)
+-Pagina per l'inserimento dei corsi (checkCorso.php, inserimentocorso.html)
 
 -Pagina che visualizza i tutti i corsi disponibili con l'etá media degli utenti (visualizzacorsi.php)
+
+-Pagina che gestisce la situazione di pagamento dei vari utenti (haPagato.php)
+
+-Pagina per prenotare un evento/shooting (evento.php)
+
+# --GESTITE A LIVELLO DI DATABASE--
+-Pagina riservata all'insegnante
+-Pagina riservata al corso
+-Pagina per l'evento privato
+-Pagina per lo shooting
+
+# DOMANDE
+-Come gestisco la questione dei corsi? Con un'altra tabella? Oppure va bene se elimino la PrimaryKey "Nome" dalla tabella corso in modo creare piú righe con lo stesso corso ma mail diverse? (Foreign Key)
