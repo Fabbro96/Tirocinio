@@ -5,24 +5,3 @@ Selezionando "LOG IN" potrá loggarsi e qui ci sono due strade:
 
 La pagina "logout.php" serve per distruggere la "$\_SESSION" e quindi avere attributi da ospite
 -Ospite: puó solo prenotare uno shooting
-
-#GESTITE A LIVELLO DI DATABASE
--Pagina riservata all'insegnante
--Pagina riservata al corso
--Pagina per l'evento privato
--Pagina per lo shooting
-
-#COSE FATTE
--Pagina di Home (Home.php)
--Pagina di Login (PaginaLogin.php e poi login.php per verificare la correttezza dei dati inseriti durante la fase di login)
--Pagina di registrazione utente (paginaregistrazione.html poi regutente.php per inserire nel DB i dati)
--Pagina contenente la lista degli utenti registrati (list.php)
--Pagina per l'inserimento dei corsi (checkCorso.php, inserimentocorso.html)
--Pagina che visualizza i tutti i corsi disponibili con l'etá media degli utenti (visualizzacorsi.php)
--Pagina che gestisce la situazione di pagamento dei vari utenti (haPagato.php)
--Pagina per prenotare un evento/shooting (evento.php)
-
-
-
-#DOMANDE
--Come gestisco la questione dei corsi? Con un'altra tabella? Oppure va bene se elimino la PrimaryKey "Nome" dalla tabella corso in modo creare piú righe con lo stesso corso ma mail diverse? (Foreign Key)
