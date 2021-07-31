@@ -148,6 +148,30 @@ if ($bool === true) {
     }
 </style>
 
+
+<!--<script type="text/javascript">
+
+    // Wait for the page to load first
+    window.onload = function () {
+
+        //Get a reference to the link on the page
+        // with an id of "mylink"
+        var a = document.getElementById("mylink");
+
+        //Set code to run when the link is clicked
+        // by assigning a function to "onclick"
+        a.onclick = function rimuoviIscrizione(<?php /*echo $nomeCorso */ ?>, <?php /*echo $email */ ?>) {
+            <?php
+/*            $query = "DELETE FROM corso WHERE nome = $nomeCorso AND emailPersona = $email";
+            $risultato = pg_query($dbconn, $query);
+            $querydue = "";
+            $doit = pg_query($dbconn, $querydue);*/ ?>
+        }
+        return false;
+    }
+    }
+</script>-->
+
 <h1>Tabella dei corsi</h1>
 <div class="tbl-header">
     <table cellpadding="0" cellspacing="0" border="0">
@@ -184,7 +208,11 @@ if ($bool === true) {
                 <td><?php echo $row[5]; ?></td>
                 <td><?php echo $row[6]; ?></td>
                 <td><?php echo $row[7]; ?></td>
-            <?php } else if ($emailsessione === 'admin@admin.com') {
+                <td><a id="mylink" href="?elimina">Rimuovi corso</a></td>
+                <?php
+                $_SESSION['nomeCorso'] = $row[0];
+                $_SESSION["emailStudente"] = $row[6];
+            } else if ($emailsessione === 'admin@admin.com') {
                 ?>
                 <td><?php echo $row[0]; ?></td>
                 <td><?php echo $row[1]; ?></td>
@@ -194,7 +222,11 @@ if ($bool === true) {
                 <td><?php echo $row[5]; ?></td>
                 <td><?php echo $row[6]; ?></td>
                 <td><?php echo $row[7]; ?></td>
-            <?php }
+                <td><a id="mylink" href="?elimina">Rimuovi corso</a></td>
+                <?php
+                $_SESSION['nomeCorso'] = $row[0];
+                $_SESSION["emailStudente"] = $row[6];
+            }
             } ?>
         </tr>
         </tbody>
@@ -204,3 +236,4 @@ if ($bool === true) {
 </html>
 <!-- Chiude la connessione-->
 <?php pg_close($dbconn); ?>
+
