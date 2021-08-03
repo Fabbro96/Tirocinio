@@ -1,0 +1,18 @@
+SVILUPPO DI UNA APPLICAZIONE PER LA GESTIONE DEI DATI DI UNA SCUOLA DI DANZA
+-Tabella dove tengo conto del mese e se ha pagato in quel mese oppure no
+
+--GESTITE A LIVELLO DI DATABASE--
+-Pagina riservata all'insegnante
+-Pagina riservata al corso
+-Pagina per l'evento privato
+-Pagina per lo shooting
+
+###COSE FATTE###
+-Pagina di Home (Home.php)
+-Pagina di Login (PaginaLogin.php e poi login.php per verificare la correttezza dei dati inseriti durante la fase di login)
+-Pagina di registrazione utente (paginaregistrazione.html poi regutente.php per inserire nel DB i dati)
+-Pagina contenente la lista degli utenti registrati (list.php)
+-Pagina per l'inserimento dei corsi (checkCorso.php, inserimentocorso.html)
+-Pagina che visualizza i tutti i corsi disponibili con l'etá media degli utenti (visualizzacorsi.php)
+-Pagina che gestisce la situazione di pagamento dei vari utenti (haPagato.php)
+-Pagina per prenotare un evento/shooting (evento.php)

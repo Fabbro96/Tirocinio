@@ -150,7 +150,7 @@ error_reporting(0); ?>
     <ul>
         <li><a href="PaginaLogin.html" class="active">Login</a></li>
         <li><a href="PaginaRegistrazione.html">Registrazione</a></li>
-        <li><a href="visualizzaCorsi.php">Corsi</a></li>
+        <li><a href="visualizzaCorsiUtenti.php">Corsi</a></li>
         <li><a href="#About">About</a></li>
     </ul>
     <br><br>
