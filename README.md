@@ -8,7 +8,7 @@ La pagina "<b>logout.php</b>" serve per distruggere la "$\_SESSION" e quindi ave
 <p style="color:pink;">-Ospite: puó solo prenotare uno shooting
 
  <h1 align="center"> TODO </h1>
--Fare un'altra tabella di frequenza con la mail delle persone+id corso+da quando inizia (data iscrizione) -> vede solo admin
--Tenere corso togliendo la mail tenendo il numero dell'insegnante (pubblico)
--Tabella dove tengo conto del mese e se ha pagato in quel mese oppure no
--Pagina per modifica del corso (modificare la data di inizio/fine, il maestro)
+-Fare un'altra tabella di frequenza con la mail delle persone+id corso+da quando inizia (data iscrizione) -> vede solo admin<br>
+-Tenere corso togliendo la mail tenendo il numero dell'insegnante (pubblico)<br>
+-Tabella dove tengo conto del mese e se ha pagato in quel mese oppure no<br>
+-Pagina per modifica del corso (modificare la data di inizio/fine, il maestro)<br>
