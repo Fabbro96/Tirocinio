@@ -26,7 +26,7 @@ if ($bool === true) {
 $bool = $_SESSION['emailsessione'] == 'admin@admin.com';
 if ($bool === true) {
     echo '<script type="text/javascript">';
-    echo 'alert("HEI MA COSA CI FAI QUI? NON SEI ADMIN");';
+    echo 'alert("HEI MA COSA CI FAI QUI? NON SEI ADMIN");' . $_SESSION['emailsessione'];
     echo 'window.location.href = "home.php";';
     echo '</script>';
 }
