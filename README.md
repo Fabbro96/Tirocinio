@@ -8,4 +8,3 @@ La pagina "<b>logout.php</b>" serve per distruggere la "$\_SESSION" e quindi ave
 <p style="color:pink;">-Ospite: puó solo prenotare uno shooting
 
  <h1 align="center"> TODO </h1>
--Pagina per modifica del corso (modificare la data di inizio/fine, il maestro)<br>
