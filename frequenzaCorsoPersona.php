@@ -178,7 +178,7 @@ if ($bool === true) {
             </tr>
             <tr>
                 <td>
-                    <input type="submit" name="send" onclick="checkEmpty()" class="button">
+                    <input type="submit" name="send" onclick="return checkEmpty()" class="button">
                 </td>
             </tr>
         </table>

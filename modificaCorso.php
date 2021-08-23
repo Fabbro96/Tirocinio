@@ -1,6 +1,6 @@
 <?php
 session_start();
-//error_reporting(0);
+error_reporting(0);
 if ($_SESSION['emailsessione'] != 'admin@admin.com') {
     echo '<script>';
     echo 'alert("Devi essere admin per entrare in questa pagina");';
@@ -99,7 +99,6 @@ if ($_SESSION['emailsessione'] != 'admin@admin.com') {
 
     <script>
         function checkEmpty() {
-            let nome = document.getElementById("idnome").value;
             let corso = document.getElementById("idstile").value;
             let fascia = document.getElementById("idfascia").value;
             let inizio = document.getElementById("idinizio").value;
@@ -107,10 +106,7 @@ if ($_SESSION['emailsessione'] != 'admin@admin.com') {
             let dilung = inizio.toString().length;
             let dflung = fine.toString().length;
             let costo = document.getElementById("idcosto").value;
-            if (nome === "") {
-                alert("Prego, inserire il nome del corso");
-                return false;
-            } else if (corso === "") {
+            if (corso === "") {
                 alert("Prego, inserire lo stile del corso");
                 return false;
             } else if (fascia === "") {
@@ -153,12 +149,6 @@ if ($_SESSION['emailsessione'] != 'admin@admin.com') {
                                 <?php } ?>
                             </select>
                         </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Nome:</td>
-                    <td>
-                        <input type="text" name="nome" id="idnome">
                     </td>
                 </tr>
 
@@ -213,7 +203,7 @@ if ($_SESSION['emailsessione'] != 'admin@admin.com') {
 
                 <tr>
                     <td>
-                        <button type="submit" name="buttonAggiungi" onclick="checkEmpty()" class="button"> Esegui
+                        <button type="submit" name="buttonAggiungi"  onclick="return checkEmpty()" class="button"> Esegui
                         </button>
                         <br><br>
                         <button type="reset" name="buttonReset" class="reset">Reset dei campi</button>
@@ -228,28 +218,17 @@ if ($_SESSION['emailsessione'] != 'admin@admin.com') {
     <?php
     if (isset($_POST['buttonAggiungi'])) {
         $corsoSelezionato = $_POST['corso'];
-        $nomeCorso = $_POST['nome'];
         $stile = $_POST['stile'];
         $fascia = $_POST['fascia'];
         $datainizio = $_POST['iniziocorso'];
         $datafine = $_POST['finecorso'];
         $costo = $_POST['costo'];
         $insegnante = $_POST['insegnante'];
-        //echo $corsoSelezionato . " " . $nomeCorso . " " . $stile . " " . $datainizio . " " . $datafine . " " . $costo . " " . $insegnante;
-        $drop = "ALTER TABLE frequenza_corso_persona DROP CONSTRAINT frequenza_corso_persona_nome_corso_fkey";
-        pg_query($dbconn, $drop);
-        $query = "UPDATE corso SET nome='$nomeCorso', stile='$stile', fascia_persone='$fascia', inizio='$datainizio', 
+        $query = "UPDATE corso SET stile='$stile', fascia_persone='$fascia', inizio='$datainizio', 
                   costoLezione='$costo', numeroinsegnante='$insegnante', fine='$datafine' WHERE nome='$corsoSelezionato' ";
-        $foreign = "UPDATE frequenza_corso_persona SET nome_corso='$nomeCorso' WHERE nome_corso='$corsoSelezionato' ";
-        /*$res = */
         pg_query($dbconn, $query);
-        /*$resforeign =*/
-        pg_query($dbconn, $foreign);
-        $foreign_key="ALTER TABLE frequenza_corso_persona ADD CONSTRAINT frequenza_corso_persona_nome_corso_fkey FOREIGN KEY (nome_corso) REFERENCES corso";
-        pg_query($dbconn, $foreign_key);
         echo '<script>';
         echo 'alert("Corso modificato con successo");';
-        echo 'window.location = "modificacorso.php";';
         echo '</script>';
         pg_close($dbconn);
     }

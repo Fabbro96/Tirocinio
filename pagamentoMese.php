@@ -105,13 +105,6 @@ if ($_SESSION['emailsessione'] != 'admin@admin.com') {
 
 </style>
 
-<script>
-    let mese = document.getElementById("idmese").value;
-    let valore = document.getElementById("radio").value;
-    if (mese === "--SELEZIONA IL MESE--")
-        alert()
-</script>
-
 <html lang="html">
 <head>
     <title>Pagina controllo pagamenti</title>
@@ -155,7 +148,7 @@ if ($_SESSION['emailsessione'] != 'admin@admin.com') {
                 <input type="radio" name="radio" value="false">No
             </label>
             <br><br>
-            <input type="submit" name="esegui" onclick="fun()" class="button">
+            <input type="submit" name="esegui" onclick="return fun()" class="button">
         </form>
     </div>
 </form>

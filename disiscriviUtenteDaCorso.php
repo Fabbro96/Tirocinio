@@ -107,7 +107,8 @@ if ($_SESSION['emailsessione'] != 'admin@admin.com') {
     }
 </script>
 <?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+//if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if(isset($_POST['esegui'])){
     $name = $_POST['personecorso'];
     $temp = explode(";", $name);
     $nomeCorso = $temp[0];

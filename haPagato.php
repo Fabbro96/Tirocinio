@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 $bool = !isset($_SESSION['nomesessione']) || !isset($_SESSION['cognomesessione']);
 if ($bool === true) {
@@ -22,7 +21,6 @@ if ($bool === true) {
     }
 }
 
-//QUI BISOGNA RE-INDIRIZZARE NEL CASO NON FOSSE ACCEDUTO COME ADMIN-->ATTENZIONE, VEDE NOME E COGNOME (ADMIN ADMIN)
 $bool = $_SESSION['emailsessione'] == 'admin@admin.com';
 if ($bool === true) {
     echo '<script type="text/javascript">';
