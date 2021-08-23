@@ -12,12 +12,7 @@ else {
     $result = pg_query($dbconn, $query);
 }
 
-//EOF sta per "End of file"
-$sql = <<<EOF
-      SELECT * from corso;
-EOF;
-
-//This routine executes the query on the specified database connection. -> esegue la query sul database, restituisce tutti i campi delle persone iscritte
+$sql = "SELECT * from corso";
 $ret = pg_query($dbconn, $sql);
 if (!$ret) {
     echo pg_last_error($dbconn);
@@ -83,8 +78,6 @@ if (!$ret) {
         border-bottom: solid 1px rgba(255, 255, 255, 0.1);
     }
 
-    /* demo styles */
-    @import url(https://fonts.googleapis.com/css?family=Roboto:400,500,300,700);
     body {
         background: -webkit-linear-gradient(left, #25c481, #25b7c4);
         background: linear-gradient(to right, #25c481, #25b7c4);
@@ -94,37 +87,6 @@ if (!$ret) {
     section {
         margin: 50px;
     }
-
-    /* follow me template */
-    .made-with-love {
-        margin-top: 40px;
-        padding: 10px;
-        clear: left;
-        text-align: center;
-        font-size: 10px;
-        font-family: 'Roboto', sans-serif;
-        color: #fff;
-    }
-
-    .made-with-love i {
-        font-style: normal;
-        color: #F50057;
-        font-size: 14px;
-        position: relative;
-        top: 2px;
-    }
-
-    .made-with-love a {
-        color: #fff;
-        text-decoration: none;
-    }
-
-    .made-with-love a:hover {
-        text-decoration: underline;
-    }
-
-
-    /* for custom scrollbar for webkit browser*/
 
     ::-webkit-scrollbar {
         width: 6px;
@@ -140,7 +102,6 @@ if (!$ret) {
 </style>
 
 
-
 <h1>Corsi disponibili</h1>
 <div class="tbl-header">
     <table cellpadding="0" cellspacing="0" border="0">
@@ -151,7 +112,7 @@ if (!$ret) {
             <th>Etá media</th>
             <th>Data d'inizio</th>
             <th>Data di fine</th>
-            <th>Costo mensile</th>
+            <th>Costo per lezione</th>
             <th>Numero di sicurezza Insegnante</th>
         </tr>
         </thead>
@@ -161,7 +122,7 @@ if (!$ret) {
     <table cellpadding="0" cellspacing="0" border="0">
         <tbody>
         <?php
-        $emailsessione = $_SESSION["emailsessione"];
+        //$emailsessione = $_SESSION["emailsessione"];
         $query = "SELECT * FROM corso";
         $risultato = pg_query($dbconn, $query);
         while ($row = pg_fetch_row($risultato)) { ?>
@@ -181,6 +142,5 @@ if (!$ret) {
 </div>
 </body>
 </html>
-<!-- Chiude la connessione-->
 <?php pg_close($dbconn); ?>
 

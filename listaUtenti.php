@@ -1,53 +1,41 @@
 <?php
-// Turn off all error reporting
 error_reporting(0);
-//Starto la sessione
 session_start();
-$host = 'ec2-54-229-68-88.eu-west-1.compute.amazonaws.com';
-$database = 'd53jiomn4btlbs';
-$user = 'vnnfvmmusrzflv';
-$psw = 'a04bab57975e88eaf632c96187a3d1a415dad0d352939a3f3e0503a649c49ec2';
-$dbconn = pg_connect("host=$host dbname=$database user=$user password=$psw") or die("Connessione non disponibile");
-if (!$dbconn)
-    echo "Connessione NON effettuata";
-else {
-    $query = "SELECT * FROM PersonaIscritta";
-    $result = pg_query($dbconn, $query);
-}
-
-//EOF sta per "End of file"
-$sql = <<<EOF
-      SELECT * from PersonaIscritta;
-EOF;
-
-//Esegue la query sul database, restituisce tutti i campi delle persone iscritte
-$ret = pg_query($dbconn, $sql);
-if (!$ret) {
-    echo pg_last_error($dbconn);
-    exit;
-} ?>
-<?php
 if ($_SESSION['emailsessione'] == 'admin@admin.com') {
+    $host = 'ec2-54-229-68-88.eu-west-1.compute.amazonaws.com';
+    $database = 'd53jiomn4btlbs';
+    $user = 'vnnfvmmusrzflv';
+    $psw = 'a04bab57975e88eaf632c96187a3d1a415dad0d352939a3f3e0503a649c49ec2';
+    $dbconn = pg_connect("host=$host dbname=$database user=$user password=$psw") or die("Connessione non disponibile");
+    if (!$dbconn)
+        echo "Connessione NON effettuata";
+
+    $sql = "SELECT * FROM PersonaIscritta";
+    $ret = pg_query($dbconn, $sql);
+    if (!$ret) {
+        echo pg_last_error($dbconn);
+        exit;
+    }
     ?>
     <!DOCTYPE html>
-    <html>
+    <html lang="html">
     <title>
         Tabella degli utenti iscritti
     </title>
-
     <body>
+
     <script>
         $(window).on("load resize ", function () {
-            var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
+            let scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
             $('.tbl-header').css({'padding-right': scrollWidth});
         }).resize();
     </script>
-    <body>
     <style>
+
+        @import url(https://fonts.googleapis.com/css?family=Roboto:400,500,300,700);
 
         h1 {
             font-size: 30px;
-            color: #fff;
             text-transform: uppercase;
             font-weight: 300;
             text-align: center;
@@ -66,10 +54,9 @@ if ($_SESSION['emailsessione'] == 'admin@admin.com') {
         }
 
         .tbl-content {
-            /*Altezza della tabella*/
             height: 100%;
             overflow-x: auto;
-            margin-top: 0px;
+            margin-top: 0;
             border: 1px solid rgba(255, 255, 255, 0.3);
         }
 
@@ -93,7 +80,6 @@ if ($_SESSION['emailsessione'] == 'admin@admin.com') {
         }
 
         /* demo styles */
-        @import url(https://fonts.googleapis.com/css?family=Roboto:400,500,300,700);
         body {
             background: -webkit-linear-gradient(left, #25c481, #25b7c4);
             background: linear-gradient(to right, #25c481, #25b7c4);
@@ -103,35 +89,6 @@ if ($_SESSION['emailsessione'] == 'admin@admin.com') {
         section {
             margin: 50px;
         }
-
-        /* follow me template */
-        .made-with-love {
-            margin-top: 40px;
-            padding: 10px;
-            clear: left;
-            text-align: center;
-            font-size: 10px;
-            font-family: "Roboto", sans-serif;
-            color: #fff;
-        }
-
-        .made-with-love i {
-            font-style: normal;
-            color: #F50057;
-            font-size: 14px;
-            position: relative;
-            top: 2px;
-        }
-
-        .made-with-love a {
-            color: #fff;
-            text-decoration: none;
-        }
-
-        .made-with-love a:hover {
-            text-decoration: underline;
-        }
-
 
         /* for custom scrollbar for webkit browser*/
 
@@ -149,7 +106,7 @@ if ($_SESSION['emailsessione'] == 'admin@admin.com') {
     </style>
     <h1>Tabella degli utenti</h1>
     <div class="tbl-header">
-        <table cellpadding="0" cellspacing="0" border="0">
+        <table>
             <thead>
             <tr>
                 <th>Nome</th>
@@ -163,7 +120,7 @@ if ($_SESSION['emailsessione'] == 'admin@admin.com') {
         </table>
     </div>
     <div class="tbl-content">
-        <table cellpadding="0" cellspacing="0" border="0">
+        <table>
             <tbody>
             <!-- Cicla riga per riga. $row[posizione] serve per restituire l'elemento nella colonna posizione -->
             <?php while ($row = pg_fetch_row($ret)) { ?>
@@ -180,6 +137,7 @@ if ($_SESSION['emailsessione'] == 'admin@admin.com') {
         </table>
     </div>
     </body>
+
     </html>
 <?php } else {
 

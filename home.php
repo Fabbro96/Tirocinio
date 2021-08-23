@@ -6,13 +6,6 @@
 </head>
 <body>
 <style>
-    /*CSS per definire i blocchi di link accessibili*/
-    ul {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-    }
-
     body {
         background: #76b852; /* fallback for old browsers */
         background: -webkit-linear-gradient(right, lightskyblue, lightblue);
@@ -24,10 +17,41 @@
         -moz-osx-font-smoothing: grayscale;
     }
 
+    .box {
+    }
+
+    .box select {
+        background-color: darkred;
+        color: white;
+        padding: 5px;
+        border: none;
+        box-shadow: blue;
+        -webkit-appearance: button;
+        outline: none;
+    }
+
+    .box::before {
+        position: absolute;
+        text-align: center;
+        color: grey;
+        background-color: grey;
+        pointer-events: none;
+    }
+
+    .box select option {
+        padding: 30px;
+    }
+
     h1 {
         font-family: "Roboto", sans-serif;
         font-size: 44px;
         align-content: center;
+    }
+
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
     }
 
     li {
@@ -59,7 +83,6 @@
         color: darkred;
     }
 
-    /*CSS per il bottone submit*/
     .button {
         background-color: lightskyblue;
         border: yellow
@@ -92,8 +115,8 @@
 
 
 <ul>
-    <li class="active"><a href="Home.php">Home</a></li>
-    <li><a href="PaginaLogin.php">Login</a></li>
+    <li class="active"><a href="home.php">Home</a></li>
+    <li><a href="paginaLogin.php">Login</a></li>
     <li><a href="logout.php">Logout</a></li>
     <li><a href="#About">About</a></li>
 </ul>
@@ -117,11 +140,13 @@
 </h3>
 <form action="" method="post">
     <label for="idopzioni"></label>
-    <select id="idopzioni" class="elenco">
-        <option selected disabled>--SELEZIONA UNA OPZIONE--</option>
-        <option value="listaCorsiIscritto">Visualizza la lista dei corsi ai quali sei iscritto</option>
-        <option value="eventi">Prenota uno evento</option>
-    </select>
+    <div class="box">
+        <select id="idopzioni" class="elenco">
+            <option selected disabled>--SELEZIONA UNA OPZIONE--</option>
+            <option value="listaCorsiIscritto">Visualizza la lista dei corsi ai quali sei iscritto</option>
+            <option value="eventi">Prenota uno evento</option>
+        </select>
+    </div>
     <br>
     <br>
     <button class="button" type="submit" onclick="checkSelectedIndex()" id="button"> Esegui</button>
@@ -132,19 +157,15 @@
         let bottone = document.getElementById('button')
         // When a click
         bottone.addEventListener('click', function (event) {
-            //alert("Prego di selezionare una opzione")
             var index = selectElem.selectedIndex;
             if (index === 0)
                 alert("Prego di selezionare una opzione")
             else if (index === 1) {
-                window.location = "visualizzaCorsi.php";
-                //Perché reindirizza solo dopo un alert?
+                window.location = "visualizzaCorsiUtenti.php";
                 alert("Reindirizzamento in corso..");
             }
-            //location.replace("https://www.w3schools.com")
             else if (index === 2) {
                 window.location = "evento.php";
-                //Perché reindirizza solo dopo un alert?
                 alert("Reindirizzamento in corso..");
             } else {
                 //Se ospite

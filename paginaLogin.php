@@ -6,10 +6,10 @@ error_reporting(0); ?>
         var email = document.getElementById("inputemail").value;
         var psw = document.getElementById("inputpassword").value;
 
-        if (email == "") {
+        if (email === "") {
             alert("Prego, inserire la mail");
             return false;
-        } else if (psw == "") {
+        } else if (psw === "") {
             alert("Prego, inserire il password");
             return false;
         }
@@ -23,7 +23,6 @@ error_reporting(0); ?>
 </head>
 <body>
 <style>
-
     body {
         background: #76b852; /* fallback for old browsers */
         background: -webkit-linear-gradient(right, lightskyblue, lightblue);
@@ -35,7 +34,6 @@ error_reporting(0); ?>
         -moz-osx-font-smoothing: grayscale;
     }
 
-    /*CSS per definire i blocchi di link accessibili*/
     ul {
         list-style-type: none;
         margin: 0;
@@ -71,7 +69,6 @@ error_reporting(0); ?>
         color: darkred;
     }
 
-    /*CSS per i campi obbligatori da inserire*/
     .input {
         border: 2px solid red;
         border-radius: 4px;
@@ -81,7 +78,6 @@ error_reporting(0); ?>
         background-color: whitesmoke;
     }
 
-    /*CSS per il bottone submit*/
     .submit {
         background-color: lightskyblue;
         border: yellow
@@ -104,8 +100,6 @@ error_reporting(0); ?>
         padding: 10px;
         color: white;
         font-size: 14px;
-        -webkit-transition: all 0.3 ease;
-        transition: all 0.3 ease;
         cursor: auto;
     }
 
@@ -113,7 +107,6 @@ error_reporting(0); ?>
         background: blue;
     }
 
-    /*CSS per il bottone reset*/
     .reset:hover, .form button:active, .form button:focus {
         background: red;
     }
@@ -129,28 +122,16 @@ error_reporting(0); ?>
         width: auto;
         border: 0;
         font-size: 13px;
-        -webkit-transition: all 0.3 ease;
-        transition: all 0.3 ease;
         cursor: auto;
 
     }
-
-    .returnToHome {
-        width: 50%;
-        text-align: left;
-        text-decoration: underline;
-        color: green;
-        /*font-size: 0.75rem;*/
-        font-family: "Roboto", sans-serif;
-    }
-
 </style>
 
 <center>
     <ul>
-        <li><a href="PaginaLogin.html" class="active">Login</a></li>
-        <li><a href="PaginaRegistrazione.html">Registrazione</a></li>
-        <li><a href="visualizzaCorsiUtenti.php">Corsi</a></li>
+        <li><a href="home.php">Home</a></li>
+        <li class="active"><a href="paginaLogin.php">Login</a></li>
+        <li><a href="vediTuttiCorsi.php">Corsi disponibili</a></li>
         <li><a href="#About">About</a></li>
     </ul>
     <br><br>
@@ -161,7 +142,9 @@ error_reporting(0); ?>
             <tr>
                 <td style="font-weight: bold">E-Mail utente:</td>
                 <td>
-                    <input type="email" name="emailutente" id="inputemail" placeholder="Email" class="input">
+                    <label for="inputemail">
+                        <input type="email" name="emailutente" id="inputemail" placeholder="Email" class="input">
+                    </label>
                 </td>
             </tr>
 
@@ -207,15 +190,13 @@ if (isset($_POST['buttonLogin'])) {
         $email = $_POST['emailutente'];
         $password = $_POST['password'];
     }
-    $sql = <<<EOF
-          SELECT * from PersonaIscritta;
-EOF;
+    $sql = "SELECT * from PersonaIscritta";
     $ret = pg_query($dbconn, $sql);
     if (!$ret) {
         echo pg_last_error($dbconn);
         exit;
     }
-    static $i = 0;
+    static $v = false;
     //Filtro tutte le mail e le password presenti nel DB, appena ne trovo due di uguali restituisco una stringa concatenata al nome e cognome
     while ($row = pg_fetch_row($ret))
         if ($row[2] == strtolower($email) && $row[5] == $password) {
@@ -225,7 +206,7 @@ EOF;
             $_SESSION["nomesessione"] = $row[0];
             $_SESSION["cognomesessione"] = $row[1];
             $nomeutente = $row[0];
-            $i = $i + 1;
+            $v = true;
             $query = "SELECT hapagato FROM personaiscritta WHERE '$email'=email";
             $res = pg_query($dbconn, $query);
             if ($_SESSION["emailsessione"] === "admin@admin.com")
@@ -243,12 +224,11 @@ EOF;
             Salve, <?php echo $nomeutente ?>. <a href="logout.php">Per eseguire il logout clicca qui</a>
             <?php
         }
-    if ($i == 0) {
+    if ($v === false) {
         echo '<script>';
         echo 'alert("Password o E-Mail errata. Nel caso non fossi registrato, registrati.");';
         echo '</script>';
         echo '<br>';
-
     }
     pg_close($dbconn);
 

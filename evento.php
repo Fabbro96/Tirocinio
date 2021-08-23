@@ -1,5 +1,65 @@
 <?php session_start();
 ?>
+    <style>
+        body {
+            background: #76b852; /* fallback for old browsers */
+            background: -webkit-linear-gradient(right, lightskyblue, lightblue);
+            background: -moz-linear-gradient(right, lightskyblue, lightblue);
+            background: -o-linear-gradient(right, lightskyblue, lightblue);
+            background: linear-gradient(to left, lightskyblue, lightblue);
+            font-family: "Roboto", sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .bottone {
+            background-color: lightskyblue;
+            border: yellow
+            color: white;
+            padding: 7px 7px;
+            text-align: center;
+            text-decoration: aliceblue;
+            display: block;
+            font-size: 15px;
+            font-family: Arial, fantasy;
+        }
+
+        .bottone {
+            font-family: "Roboto", sans-serif;
+            text-transform: uppercase;
+            outline: 0;
+            background: dodgerblue;
+            width: auto;
+            border: 0;
+            padding: 10px;
+            color: white;
+            font-size: 14px;
+            -webkit-transition: all 0.3 ease;
+            transition: all 0.3 ease;
+            cursor: auto;
+        }
+
+        .bottone:hover, .form button:active, .form button:focus {
+            background: blue;
+        }
+
+        .radio {
+            top: 0;
+            left: 0;
+            background: #c9ded6;
+            border-radius: 50%;
+        &::after {
+             display: block;
+             content: '';
+             position: absolute;
+             opacity: 0;
+             border-radius: 50%;
+             background: #fff;
+         }
+        }
+
+    </style>
+
     <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
         <table>
             <tr>
@@ -36,35 +96,61 @@
                         <div class="radiobutton">
                             <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?> ">
                                 <label>
-                                    <input type="radio" name="radio" value="shooting"> Photo shooting
+                                    <input type="radio" name="radio" value="shooting" class="radio"> Photo shooting
                                 </label>
                                 <label>
-                                    <input type="radio" name="radio" value="privateEvent"> Evento Privato
+                                    <input type="radio" name="radio" value="privateEvent" class="radio"> Evento Privato
                                 </label>
                             </form>
                         </div>
-                        <script>
-                            function fun() {
-                                const rbs = document.querySelectorAll('input[name="radio"]');
-                                let selectedValue;
-                                for (const rb of rbs) {
-                                    if (rb.checked) {
-                                        selectedValue = rb.value;
-                                        break;
-                                    }
-                                }
-                            }
-                        </script>
                         <?php
-                        $tipo = $_POST['radio'];
                     } ?>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <button type="submit" name="btnEvento" onclick="return checkEmpty()" class="submit"> Prenota
+                    <button type="submit" name="btnEvento" onclick="return fun()" class="bottone"> Prenota
                 </td>
             </tr>
+            <script>
+                function fun() {
+                    let i = 0;
+                    const rbs = document.querySelectorAll('input[name="radio"]');
+                    let nome = document.getElementById("inputnome").value;
+                    let data = document.getElementById("iddata").value;
+                    let luogo = document.getElementById("inputluogo").value;
+                    let orario = document.getElementById("inputorario").value;
+                    let selectedValue;
+                    if (nome === "") {
+                        alert("Inserisci il nome");
+                        return false;
+                    }
+                    if (data === "") {
+                        alert("Inserisci la data");
+                        return false;
+                    }
+                    if (luogo === "") {
+                        alert("Inserisci il luogo");
+                        return false;
+                    }
+                    if (orario === "") {
+                        alert("Inserisci l'orario");
+                        return false;
+                    }
+                    <?php if (isset($_SESSION['nomesessione']) && isset($_SESSION['cognomesessione'])) { ?>
+                    for (const rb of rbs) {
+                        if (rb.checked) {
+                            i++;
+                            selectedValue = rb.value;
+                            break;
+                        }
+                    }
+                    if (i === 0) {
+                        alert("Scegli una opzione");
+                        return false;
+                    }<?php }?>
+                }
+            </script>
         </table>
     </form>
 
@@ -73,6 +159,7 @@ if (isset($_SESSION['emailsessione']))
     $email_persona = $_SESSION['emailsessione'];
 else
     $email_persona = 'ospite';
+
 if (isset($_POST['btnEvento'])) {
     error_reporting(0);
     $host = 'ec2-54-229-68-88.eu-west-1.compute.amazonaws.com';
@@ -88,15 +175,6 @@ if (isset($_POST['btnEvento'])) {
         $dataevento = date('Y-m-d', strtotime($_POST['dataevento']));
         $luogo = $_POST['luogo'];
         $orario = $_POST['orario'];
-    }
-    $sql = <<<EOF
-      SELECT email from PersonaIscritta;
-EOF;
-
-    $ret = pg_query($dbconn, $sql);
-    if (!$ret) {
-        echo pg_last_error($dbconn);
-        exit;
     }
     $attenzione = 0; //Uso questa variabile per gestire diversi tipi di errori
     if ($nome == "" || $dataevento == "" || $luogo == "" || $orario == "")
@@ -121,5 +199,4 @@ EOF;
     }
     pg_close($dbconn);
 }
-
 ?>
