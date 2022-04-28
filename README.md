@@ -6,5 +6,3 @@ Selezionando "LOG IN" potrá loggarsi e qui ci sono due strade:<br><br>
 
 La pagina "<b>logout.php</b>" serve per distruggere la "$\_SESSION" e quindi avere attributi da ospite
 <p style="color:pink;">-Ospite: puó solo prenotare uno shooting
-
- <h1 align="center"> TODO </h1>
